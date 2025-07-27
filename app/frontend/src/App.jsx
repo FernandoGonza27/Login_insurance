@@ -7,10 +7,11 @@ import './App.css'
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setAuthenticated(!!token);
-  }, []);
+ useEffect(() => {
+  axios.get("http://localhost:3001/api/auth/welcome", { withCredentials: true })
+    .then(() => setAuthenticated(true))
+    .catch(() => setAuthenticated(false));
+}, []);
 
   return (
     <Router>

@@ -7,16 +7,19 @@ function LoginForm({ setAuthenticated }) {
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const res = await axios.post("http://localhost:3001/api/auth/login", { email, password });
-      localStorage.setItem("token", res.data.token);
-      setAuthenticated(true);
-    } catch (err) {
-      setErrorMsg(err.response?.data?.message || "Error al iniciar sesión");
-    }
-  };
+  try {
+    const res = await axios.post("http://localhost:3001/api/auth/login", {
+      email,
+      password
+    }, { withCredentials: true });
+
+    setAuthenticated(true);
+  } catch (err) {
+    setErrorMsg(err.response?.data?.message || "Error al iniciar sesión");
+  }
+};
 
   return (
     <div>
