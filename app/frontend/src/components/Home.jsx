@@ -2,13 +2,15 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Home() {
-  const navigate = useNavigate();
+function Home({ setAuthenticated }) {
+ const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:3001/api/auth/logout", {}, { withCredentials: true });
-      navigate("/"); // Redirige al login
+      await axios.post("http://localhost:3300/api/auth/logout", {}, { withCredentials: true });
+      console.log("Logout exitoso");
+      setAuthenticated(false); 
+      navigate("/");
     } catch (err) {
       console.error("Error al cerrar sesión:", err);
     }

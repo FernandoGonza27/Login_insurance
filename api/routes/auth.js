@@ -8,7 +8,11 @@ router.get("/welcome", verifyToken, (req, res) => {
   res.json({ message: "Usuario logueado satisfactoriamente" });
 });
 router.post("/logout", (req, res) => {
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "strict"
+  });
   res.status(200).json({ message: "Logout exitoso" });
 });
 
